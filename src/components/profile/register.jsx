@@ -2,7 +2,6 @@ import axios from 'axios';
 import sha256 from 'crypto-js/sha256';
 import Cookie from 'js-cookie';
 import React, { useEffect, useState } from 'react';
-import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 import env from '../../env.json';
 import './login.css';
@@ -46,26 +45,6 @@ function Register() {
     });
   };
 
-  const handleGoogleLogin = async (googleData) => {
-    const { tokenObj } = googleData;
-    try {
-      const response = await axios.post(`${env.api}/users/googleRegister`, {
-        token: tokenObj.id_token
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      if (response.data && response.status === 200) {
-        Cookie.set("signed_in_user", response.data);
-        navigate("/");
-        window.location.reload();
-      }
-    } catch (error) {
-      console.log('Error:', error);
-    }
-  };
-
   return (
     <div className="login-background">
       <div className="login-container">
@@ -105,13 +84,6 @@ function Register() {
         </form>
 
         <div className="separator">Or register with <strong>Google</strong></div>
-        <GoogleLogin
-          clientId="YOUR_GOOGLE_CLIENT_ID"
-          buttonText="Register with Google"
-          onSuccess={handleGoogleLogin}
-          onFailure={handleGoogleLogin}
-          cookiePolicy={'single_host_origin'}
-        />
 
         <div className="terms">
           By clicking Register, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.

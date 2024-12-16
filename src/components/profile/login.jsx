@@ -2,7 +2,6 @@ import axios from 'axios';
 import sha256 from 'crypto-js/sha256';
 import Cookie from "js-cookie";
 import React, { useEffect, useState } from 'react';
-import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from "react-router";
 import env from "../../env.json";
 import './login.css';
@@ -36,26 +35,6 @@ function Login() {
     });
   };
 
-  const handleGoogleLogin = async (googleData) => {
-    const { tokenObj } = googleData;
-    try {
-      const response = await axios.post(`${env.api}/users/googleLogin`, {
-        token: tokenObj.id_token
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      if (response.data && response.status === 200) {
-        Cookie.set("signed_in_user", response.data);
-        navigate("/");
-        window.location.reload();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     document.body.classList.add('no-scroll');
 
@@ -79,13 +58,6 @@ function Login() {
           </div>
           <button type="submit" className="login-button" onClick={handleSubmit}>Login</button>
           <div className="separator">Do you want to continue with Google?</div>
-          <GoogleLogin
-            clientId="YOUR_GOOGLE_CLIENT_ID"
-            buttonText="Login with Google"
-            onSuccess={handleGoogleLogin}
-            onFailure={handleGoogleLogin}
-            cookiePolicy={'single_host_origin'}
-          />
           <div className="terms">
             By clicking continue, you agree to our <strong>Terms of Service</strong> and <strong>Privacy policy</strong>
           </div>

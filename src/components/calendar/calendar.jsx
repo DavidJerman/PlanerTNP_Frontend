@@ -119,8 +119,7 @@ function Calendar() {
             (startDate <= day && endDate >= day) // Checks if the task spans across the week
         ));
     });
-    
-    
+
 
     const renderTaskInTimeSlot = (day, slot) => {
         const dayTasks = tasks.filter(task => {

@@ -2,32 +2,24 @@ import axios from 'axios';
 import Cookie from "js-cookie";
 import React, { useEffect, useState } from 'react';
 import env from "../../env.json";
+import { useTranslation } from 'react-i18next';
 import './todoList.css';
 
 function TodoList() {
+  const { t } = useTranslation(); // Use the translation hook
   const [tasks, setTasks] = useState([]);
-
   const [showModal, setShowModal] = useState(false);
   const [newTask, setNewTask] = useState({
     name: '',
     urgent: false,
-    color: '#3498db', // Default color
-    startDateTime: '', // Start date and time as a string
-    endDateTime: '',   // End date and time as a string
+    color: '#3498db',
+    startDateTime: '',
+    endDateTime: '',
   });
 
-  // Updated color scheme
   const filters = [
-    '#1abc9c',
-    '#2ecc71',
-    '#3498db',
-    '#9b59b6',
-    '#f1c40f',
-    '#e67e22',
-    '#e74c3c',
-    '#34495e',
-    '#95a5a6',
-    '#7f8c8d',
+    '#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#f1c40f', '#e67e22',
+    '#e74c3c', '#34495e', '#95a5a6', '#7f8c8d',
   ];
 
   useEffect(() => {
@@ -39,12 +31,10 @@ function TodoList() {
     });
   }, [showModal]);
 
-  // Handle opening the modal
   const handleAddTask = () => {
     setShowModal(true);
   };
 
-  // Handle closing the modal
   const handleCloseModal = () => {
     setShowModal(false);
     setNewTask({
@@ -56,7 +46,6 @@ function TodoList() {
     });
   };
 
-  // Handle input changes in the modal
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setNewTask((prevTask) => ({
@@ -65,7 +54,6 @@ function TodoList() {
     }));
   };
 
-  // Handle submitting the new task
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newTask.name.trim() === '') return;
@@ -74,7 +62,7 @@ function TodoList() {
     const endDateTime = new Date(newTask.endDateTime);
 
     if (endDateTime < startDateTime) {
-      alert('End date and time cannot be before start date and time.');
+      alert(t('todo.alertEndDate'));  // Translated alert
       return;
     }
 
@@ -90,139 +78,119 @@ function TodoList() {
     });
   };
 
-  // Render tasks
   const renderTasks = () => {
     return tasks.map((task, index) => (
-      <li key={index} className="task-item">
-        <div className="task-content">
-          <div
-            className="color-circle"
-            style={{ backgroundColor: task.color }}
-          ></div>
-          <span className={`task-name ${task.urgent ? 'urgent' : ''}`}>
+        <li key={index} className="task-item">
+          <div className="task-content">
+            <div className="color-circle" style={{ backgroundColor: task.color }}></div>
+            <span className={`task-name ${task.urgent ? 'urgent' : ''}`}>
             {task.name}
           </span>
-          <span className="task-date">
-            {/* Display start date and end date with time */}
-            {new Date(task.startDateTime).toLocaleString('en-GB')} -{' '}
-            {new Date(task.endDateTime).toLocaleString('en-GB')}
+            <span className="task-date">
+            {new Date(task.startDateTime).toLocaleString('en-GB')} - {new Date(task.endDateTime).toLocaleString('en-GB')}
           </span>
-        </div>
-      </li>
+          </div>
+        </li>
     ));
   };
 
   return (
-    <div className="page-background">
-      <div className="todo-container">
-        <h1>My Todos</h1>
-        <div className="todo-list">
-          <div className="todo-header">
-            <button className="add-task-button" onClick={handleAddTask}>
-              +
-            </button>
+      <div className="page-background">
+        <div className="todo-container">
+          <h1>{t('todo.title')}</h1>  {/* Translated title */}
+          <div className="todo-list">
+            <div className="todo-header">
+              <button className="add-task-button" onClick={handleAddTask}>
+                {t('todo.addTaskButton')}  {/* Translated button */}
+              </button>
+            </div>
+            <ul>{renderTasks()}</ul>
           </div>
-          <ul>{renderTasks()}</ul>
         </div>
-      </div>
 
-      {showModal && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2>Add New Task</h2>
-            <form onSubmit={handleSubmit}>
-              {/* Task Name */}
-              <div className="form-group">
-                <label htmlFor="taskName">Task Name:</label>
-                <input
-                  type="text"
-                  id="taskName"
-                  name="name"
-                  value={newTask.name}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Color Selection */}
-              <div className="form-group">
-                <label>Select Color:</label>
-                <div className="color-options">
-                  {filters.map((color, index) => (
-                    <div
-                      key={index}
-                      className={`color-circle ${newTask.color === color ? 'selected' : ''
-                        }`}
-                      style={{ backgroundColor: color }}
-                      onClick={() =>
-                        setNewTask((prevTask) => ({ ...prevTask, color }))
-                      }
+        {showModal && (
+            <div className="modal-overlay" onClick={handleCloseModal}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <h2>{t('todo.addNewTask')}</h2> {/* Translated heading */}
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="taskName">{t('todo.taskNameLabel')}</label> {/* Translated label */}
+                    <input
+                        type="text"
+                        id="taskName"
+                        name="name"
+                        value={newTask.name}
+                        onChange={handleInputChange}
+                        required
                     />
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              {/* Start Date and Time */}
-              <div className="form-group">
-                <label htmlFor="startDateTime">Start Date and Time:</label>
-                <input
-                  type="datetime-local"
-                  id="startDateTime"
-                  name="startDateTime"
-                  value={newTask.startDateTime}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+                  <div className="form-group">
+                    <label>{t('todo.selectColorLabel')}</label> {/* Translated label */}
+                    <div className="color-options">
+                      {filters.map((color, index) => (
+                          <div
+                              key={index}
+                              className={`color-circle ${newTask.color === color ? 'selected' : ''}`}
+                              style={{ backgroundColor: color }}
+                              onClick={() =>
+                                  setNewTask((prevTask) => ({ ...prevTask, color }))
+                              }
+                          />
+                      ))}
+                    </div>
+                  </div>
 
-              {/* End Date and Time */}
-              <div className="form-group">
-                <label htmlFor="endDateTime">End Date and Time:</label>
-                <input
-                  type="datetime-local"
-                  id="endDateTime"
-                  name="endDateTime"
-                  value={newTask.endDateTime}
-                  onChange={handleInputChange}
-                  required
-                  min={newTask.startDateTime} // Ensure end datetime is after start datetime
-                />
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="startDateTime">{t('todo.startDateTimeLabel')}</label> {/* Translated label */}
+                    <input
+                        type="datetime-local"
+                        id="startDateTime"
+                        name="startDateTime"
+                        value={newTask.startDateTime}
+                        onChange={handleInputChange}
+                        required
+                    />
+                  </div>
 
-              {/* Urgent Checkbox */}
-              <div className="form-group checkbox-group">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="urgent"
-                    checked={newTask.urgent}
-                    onChange={handleInputChange}
-                  />
-                  Mark as urgent
-                </label>
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="endDateTime">{t('todo.endDateTimeLabel')}</label> {/* Translated label */}
+                    <input
+                        type="datetime-local"
+                        id="endDateTime"
+                        name="endDateTime"
+                        value={newTask.endDateTime}
+                        onChange={handleInputChange}
+                        required
+                        min={newTask.startDateTime}
+                    />
+                  </div>
 
-              {/* Buttons */}
-              <div className="modal-buttons">
-                <button type="submit" className="submit-button">
-                  Add Task
-                </button>
-                <button
-                  type="button"
-                  className="cancel-button"
-                  onClick={handleCloseModal}
-                >
-                  Cancel
-                </button>
+                  <div className="form-group checkbox-group">
+                    <label>
+                      <input
+                          type="checkbox"
+                          name="urgent"
+                          checked={newTask.urgent}
+                          onChange={handleInputChange}
+                      />
+                      {t('todo.markAsUrgent')} {/* Translated label */}
+                    </label>
+                  </div>
+
+                  <div className="modal-buttons">
+                    <button type="submit" className="submit-button">
+                      {t('todo.addTask')}  {/* Translated button */}
+                    </button>
+                    <button type="button" className="cancel-button" onClick={handleCloseModal}>
+                      {t('todo.cancelButton')}  {/* Translated button */}
+                    </button>
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-        </div>
-      )}
-    </div>
+            </div>
+        )}
+      </div>
   );
 }
 

@@ -1,0 +1,71 @@
+{
+  "language": "Language",
+  "register": {
+    "title": "Register",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "button": "Register",
+    "terms": "By clicking Register, you agree to our Terms of Service and Privacy Policy."
+  },
+  "navbar": {
+    "home": "Home",
+    "todos": "Todos",
+    "todosHistory": "Todos history",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "login": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "invalid email or password": "Invalid email or password",
+    "by clicking continue, you agree to our": "By clicking continue, you agree to our",
+    "terms of service": "Terms of Service",
+    "privacy policy": "Privacy policy",
+    "and": "and"
+  },
+  "myprofile": {
+    "my profile": "My Profile",
+    "first name": "First Name",
+    "last name": "Last Name",
+    "username": "Username",
+    "email": "Email",
+    "country": "Country",
+    "phone number": "Phone Number",
+    "location": "Location",
+    "birthday": "Birthday",
+    "day": "Day",
+    "month": "Month",
+    "save changes": "Save Changes",
+    "delete account": "Delete Account",
+    "after deleting your account": "After deleting your account, you will lose all related information including tasks, events, projects, notes, etc. You will not be able to recover it later, so think twice before doing this.",
+    "delete my account": "Delete My Account",
+    "changes saved!": "Changes saved!",
+    "are you sure you want to delete your account?": "Are you sure you want to delete your account? This action cannot be undone.",
+    "account deleted": "Account deleted"
+  },
+  "calendar": {
+    "valid_json_file": "Please select a valid JSON file.",
+    "week": "Week of",
+    "filter": "Filter:",
+    "clear_filter": "Clear Filter",
+    "import_schedule": "Import your own schedule: "
+  },
+  "todo": {
+    "title": "My Todos",
+    "addTaskButton": "+",
+    "addNewTask": "Add New Task",
+    "taskNameLabel": "Task Name:",
+    "selectColorLabel": "Select Color:",
+    "startDateTimeLabel": "Start Date and Time:",
+    "endDateTimeLabel": "End Date and Time:",
+    "markAsUrgent": "Mark as urgent",
+    "cancelButton": "Cancel",
+    "addTask": "Add Task",
+    "alertEndDate": "End date and time cannot be before start date and time."
+  }
+}

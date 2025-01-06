@@ -1,20 +1,20 @@
 import axios from 'axios';
 import sha256 from 'crypto-js/sha256';
 import Cookie from "js-cookie";
-import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router";
 import env from "../../env.json";
+import { useTranslation } from 'react-i18next';
 import './login.css';
 
-
 function Login() {
-
+    const { t } = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();  // Prevent the default form submit behavior
+        e.preventDefault();
         const hashedPassword = sha256(password).toString();
         const data = {
             Email: email,
@@ -30,7 +30,7 @@ function Login() {
             navigate("/");
             window.location.reload();
         }).catch((error) => {
-            alert("Invalid email or password");
+            alert(t("login.invalid email or password"));
             console.log(error);
         });
     };
@@ -46,22 +46,21 @@ function Login() {
     return (
         <div className="login-background">
             <div className="login-container">
-                <h1>Login</h1>
+                <h1>{t('login.login')}</h1>
                 <div className="login-form">
                     <div className="form-group">
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                               required/>
+                        <label htmlFor="email">{t('login.email')}:</label>
+                        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" value={password}
-                               onChange={(e) => setPassword(e.target.value)} required/>
+                        <label htmlFor="password">{t('login.password')}:</label>
+                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     </div>
-                    <button type="submit" className="login-button" onClick={handleSubmit}>Login</button>
+                    <button type="submit" className="login-button" onClick={handleSubmit}>{t('login.login')}</button>
                     <div className="terms">
-                        By clicking continue, you agree to our <strong>Terms of Service</strong> and <strong>Privacy
-                        policy</strong>
+                        {t('login.by clicking continue, you agree to our')}{' '}
+                        <strong>{t('login.terms of service')}</strong> {t('login.and')}{' '}
+                        <strong>{t('login.privacy policy')}</strong>
                     </div>
                 </div>
             </div>

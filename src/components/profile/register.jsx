@@ -1,11 +1,13 @@
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import sha256 from 'crypto-js/sha256';
-import React, {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import env from '../../env.json';
 import './login.css';
 
 function Register() {
+    const { t } = useTranslation(); // Access translation
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,9 +15,7 @@ function Register() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Disable scrolling when on the register page
         document.body.classList.add('no-scroll');
-
         return () => {
             document.body.classList.remove('no-scroll');
         };
@@ -23,9 +23,8 @@ function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (password !== confirmPassword) {
-            alert('Passwords do not match!');
+            alert(t('register.passwordMismatch'));
             return;
         }
 
@@ -38,25 +37,23 @@ function Register() {
 
         try {
             await axios.post(`${env.api}/auth/register`, data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Content-Type': 'application/json' }
             });
-            alert('Registration successful! Please log in.');
+            alert(t('register.success'));
             navigate("/login");
         } catch (error) {
             console.log('Error:', error);
-            alert('Username exists or an error occurred.');
+            alert(t('register.error'));
         }
     };
 
     return (
         <div className="login-background">
             <div className="login-container">
-                <h1>Register</h1>
+                <h1>{t('register.title')}</h1>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="username">{t('register.username')}:</label>
                         <input
                             type="text"
                             id="username"
@@ -66,7 +63,7 @@ function Register() {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">{t('register.email')}:</label>
                         <input
                             type="email"
                             id="email"
@@ -76,7 +73,7 @@ function Register() {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">{t('register.password')}:</label>
                         <input
                             type="password"
                             id="password"
@@ -86,7 +83,7 @@ function Register() {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="confirm-password">Confirm Password:</label>
+                        <label htmlFor="confirm-password">{t('register.confirmPassword')}:</label>
                         <input
                             type="password"
                             id="confirm-password"
@@ -95,12 +92,10 @@ function Register() {
                             required
                         />
                     </div>
-                    <button type="submit" className="login-button">Register</button>
+                    <button type="submit" className="login-button">{t('register.button')}</button>
                 </form>
-
                 <div className="terms">
-                    By clicking Register, you agree to our <strong>Terms of Service</strong> and <strong>Privacy
-                    Policy</strong>.
+                    {t('register.terms')}
                 </div>
             </div>
         </div>

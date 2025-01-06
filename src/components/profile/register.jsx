@@ -9,6 +9,7 @@ function Register() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,6 +23,11 @@ function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
 
         const hashedPassword = sha256(password).toString();
         const data = {
@@ -76,6 +82,16 @@ function Register() {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="confirm-password">Confirm Password:</label>
+                        <input
+                            type="password"
+                            id="confirm-password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                         />
                     </div>

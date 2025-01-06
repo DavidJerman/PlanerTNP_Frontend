@@ -8,9 +8,13 @@
     background-repeat: repeat;
     background-color: rgba(255, 255, 255, 0.4); 
     background: transparent;
+<<<<<<< Updated upstream
     padding-bottom: 30px; /* Space below the calendar */
 
     
+=======
+    padding-bottom: 30px; /* Space below the calendar */   
+>>>>>>> Stashed changes
 }
 
 .calendar-header {

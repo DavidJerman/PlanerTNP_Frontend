@@ -59,7 +59,7 @@ function Navbar({ toggleTheme, darkMode }) {
                     <LanguageSwitcher />
                 </li>
                 <li className="navbar-item">
-                    <button onClick={toggleTheme} className="theme-toggle">
+                    <button className="theme-toggle-button" onClick={toggleTheme}>
                         {darkMode ? "Light Mode" : "Dark Mode"}
                     </button>
                 </li>

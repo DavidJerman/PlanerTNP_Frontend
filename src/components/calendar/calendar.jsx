@@ -5,6 +5,7 @@ import '../../App.css';
 import env from "../../env.json";
 import { useTranslation } from 'react-i18next';
 import './calendar.css';
+import Task from "../task/task";
 
 function getStartOfWeek(date) {
     const dayOfWeek = date.getDay();
@@ -38,6 +39,7 @@ const tmpdata = [
     { "task_name": "task4", "description": "neke neke", "color": "#7f8c8d", "start_time": "2024-10-24T22:00:00", "end_time": "2024-10-25T23:00:00" }
 ];
 
+
 function Calendar() {
     const { t } = useTranslation();
     const [signedIn, setSignedIn] = useState(false);
@@ -46,6 +48,68 @@ function Calendar() {
     const [tasks, setTasks] = useState([]);
     const [schedules, setSchedules] = useState([]);
     const fileInputRef = useRef(null);
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [selectedTask, setSelectedTask] = useState(null);
+
+    const handleSlotClick = (day, slot) => {
+        const slotHour = parseInt(slot.split(":")[0]);
+        const slotMinutes = parseInt(slot.split(":")[1]);
+        const slotTime = new Date(day);
+        slotTime.setHours(slotHour, slotMinutes, 0, 0);
+        const slotEnd = new Date(slotTime);
+        slotEnd.setHours(slotHour + 1, slotMinutes, 0, 0);
+
+        const isSlotOccupied = tasks.some(task => {
+            const taskStart = new Date(task.startDateTime);
+            const taskEnd = new Date(task.endDateTime);
+            return (taskStart <= slotTime && taskEnd > slotTime);
+        });
+
+        if (isSlotOccupied) return;
+
+        //Create new task
+        const newTask = {
+            name: 'New Task',
+            color: filters[0],
+            startDateTime: slotTime,
+            endDateTime: slotEnd,
+        };
+
+        const user = JSON.parse(Cookie.get("signed_in_user"));
+        axios.post(`${env.api}/task/user/${user._id}/tasks`, newTask, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            const createdTask = response.data.task;
+            setTasks([...tasks, createdTask]);
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
+
+    const handleTaskClick = (task) => {
+        setSelectedTask(task);
+        setModalIsOpen(true);
+    };
+
+    const handleTaskRightClick = (task) => {
+        const user = JSON.parse(Cookie.get("signed_in_user"));
+        axios.delete(`${env.api}/task/user/${user._id}/tasks/${task._id}`)
+            .then(() => {
+                setTasks(tasks.filter(t => t._id !== task._id));
+            })
+            .catch((error) => {
+                console.error("Error deleting task:", error);
+            });
+    }
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+        setSelectedTask(null);
+    };
+
 
     useEffect(() => {
         if (Cookie.get("signed_in_user") !== undefined) {
@@ -84,6 +148,7 @@ function Calendar() {
             setSignedIn(false);
         }
     }, []);
+    
 
     const handlePrevWeek = () => {
         setCurrentWeek(addDays(currentWeek, -7));
@@ -98,11 +163,17 @@ function Calendar() {
         weekDays.push(addDays(currentWeek, i));
     }
 
+    //STARI
+    // const timeSlots = [];
+    // for (let i = 0; i < 24 * 2; i++) {
+    //     const hours = Math.floor(i / 2);
+    //     const minutes = i % 2 === 0 ? "00" : "30";
+    //     timeSlots.push(`${hours.toString().padStart(2, '0')}:${minutes}`);
+    // }
+
     const timeSlots = [];
-    for (let i = 0; i < 24 * 2; i++) {
-        const hours = Math.floor(i / 2);
-        const minutes = i % 2 === 0 ? "00" : "30";
-        timeSlots.push(`${hours.toString().padStart(2, '0')}:${minutes}`);
+    for (let i = 6; i <= 22; i++) {
+        timeSlots.push(`${i.toString().padStart(2, '0')}:${"00"}`);
     }
 
     const isSameDay = (d1, d2) => {
@@ -119,6 +190,8 @@ function Calendar() {
             (startDate <= day && endDate >= day) // Checks if the task spans across the week
         ));
     });
+    
+    
 
     const renderTaskInTimeSlot = (day, slot) => {
         const dayTasks = tasks.filter(task => {
@@ -135,12 +208,14 @@ function Calendar() {
 
         return dayTasks.map((task, index) => (
             selectedFilter !== null && task.color !== filters[selectedFilter] ? null : (
-                <p key={index} className="task-ribbon" style={{ backgroundColor: task.color }}>
-                    <b>{task.name}</b>
-                </p>
+                <div key={index} className="task-ribbon" style={{ backgroundColor: task.color }}>
+                    <b onClick={() => handleTaskClick(task)}>{/*⠀*/task.name}</b>
+                    <button onClick={() => handleTaskRightClick(task)}>X</button>
+                </div>
             )
         ));
     };
+    
 
     const handleFileImport = (event) => {
         const file = event.target.files[0];
@@ -191,7 +266,7 @@ function Calendar() {
                             <div className="calendar-day">
                                 <div className="time-slots">
                                     {timeSlots.map((slot, slotIndex) => (
-                                        <div key={slotIndex} className="time-slot">
+                                        <div key={slotIndex} onClick={() => handleSlotClick(day, slot)} className="time-slot">
                                             <div className="content-area">
                                                 {renderTaskInTimeSlot(day, slot)}
                                             </div>
@@ -214,6 +289,7 @@ function Calendar() {
                     />
                 </div>) : null
             }
+            <Task isOpen={modalIsOpen} toggleModal={closeModal} task={selectedTask} />
         </div>
     );
 }

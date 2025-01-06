@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import '../App.css';
 import './navbar.css';
 
-function Navbar() {
+function Navbar({ toggleTheme, darkMode }) {
     const location = useLocation();
     const [signedIn, setSignedIn] = useState(false);
 
@@ -32,8 +32,8 @@ function Navbar() {
                         <li className={`navbar-item ${location.pathname === '/todos' ? 'active' : ''}`}>
                             <Link to="/todos">Todos</Link>
                         </li>
-                        <li className={`navbar-item ${location.pathname === '/todo-histroy' ? 'active' : ''}`}>
-                            <Link to="/todo-history">Todos history</Link>
+                        <li className={`navbar-item ${location.pathname === '/todo-history' ? 'active' : ''}`}>
+                            <Link to="/todo-history">Todos History</Link>
                         </li>
                         <li className={`navbar-item ${location.pathname === '/profile' ? 'active' : ''}`}>
                             <Link to="/profile">Profile</Link>
@@ -51,8 +51,12 @@ function Navbar() {
                             <Link to="/register">Register</Link>
                         </li>
                     </>
-                )
-                }
+                )}
+                <li className="navbar-item">
+                    <button onClick={toggleTheme} className="theme-toggle">
+                        {darkMode ? "Light Mode" : "Dark Mode"}
+                    </button>
+                </li>
             </ul>
         </nav>
     );

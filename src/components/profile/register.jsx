@@ -27,10 +27,12 @@ function Register() {
 
     const hashedPassword = sha256(password).toString();
     const data = {
-      Username: username,
-      Email: email,
+      Username: username.trim(),
+      Email: email.trim(),
       Password: hashedPassword
     };
+
+    console.log("Payload sent to backend:", data);
 
     axios.post(`${env.api}/auth/register`, data, {
       headers: {

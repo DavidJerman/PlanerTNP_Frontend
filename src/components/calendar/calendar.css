@@ -7,6 +7,7 @@
     font-family: 'Poppins', sans-serif;
     background-repeat: repeat;
     background-color: rgba(255, 255, 255, 0.4); 
+    background: transparent;
     padding-bottom: 30px; /* Space below the calendar */
 
     

@@ -16,7 +16,9 @@
     "profile": "Profil",
     "logout": "Odjava",
     "login": "Prijava",
-    "register": "Registracija"
+    "register": "Registracija",
+    "light_mode": "Svetli način",
+    "dark_mode": "Temni način"
   },
   "login": {
     "login": "Prijava",

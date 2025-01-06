@@ -16,7 +16,9 @@
     "profile": "Profil",
     "logout": "Abmelden",
     "login": "Anmelden",
-    "register": "Registrieren"
+    "register": "Registrieren",
+    "light_mode": "Hellen Modus",
+    "dark_mode": "Dunkler Modus"
   },
   "login": {
     "login": "Anmelden",

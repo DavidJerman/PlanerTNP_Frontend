@@ -16,7 +16,9 @@
     "profile": "プロフィール",
     "logout": "ログアウト",
     "login": "ログイン",
-    "register": "登録"
+    "register": "登録",
+    "light_mode": "ライトモード",
+    "dark_mode": "ダークモード"
   },
   "login": {
     "login": "ログイン",

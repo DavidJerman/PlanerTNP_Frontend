@@ -60,7 +60,7 @@ function Navbar({ toggleTheme, darkMode }) {
                 </li>
                 <li className="navbar-item">
                     <button className="theme-toggle-button" onClick={toggleTheme}>
-                        {darkMode ? "Light Mode" : "Dark Mode"}
+                        {darkMode ? t("navbar.light_mode") : t("navbar.dark_mode")}
                     </button>
                 </li>
             </ul>

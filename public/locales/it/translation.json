@@ -16,7 +16,9 @@
     "profile": "Profilo",
     "logout": "Esci",
     "login": "Accedi",
-    "register": "Registrati"
+    "register": "Registrati",
+    "light_mode": "Modalità Chiara",
+    "dark_mode": "Modalità Scura"
   },
   "login": {
     "login": "Accedi",

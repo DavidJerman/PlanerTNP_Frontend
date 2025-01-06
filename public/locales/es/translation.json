@@ -16,7 +16,9 @@
     "profile": "Perfil",
     "logout": "Cerrar sesión",
     "login": "Iniciar sesión",
-    "register": "Registrarse"
+    "register": "Registrarse",
+    "light_mode": "Modo Claro",
+    "dark_mode": "Modo Oscuro"
   },
   "login": {
     "login": "Iniciar sesión",

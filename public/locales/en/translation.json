@@ -16,7 +16,9 @@
     "profile": "Profile",
     "logout": "Logout",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "light_mode": "Light Mode",
+    "dark_mode": "Dark Mode"
   },
   "login": {
     "login": "Login",

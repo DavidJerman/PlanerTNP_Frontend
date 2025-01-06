@@ -16,7 +16,9 @@
     "profile": "Profil",
     "logout": "Déconnexion",
     "login": "Connexion",
-    "register": "S'inscrire"
+    "register": "S'inscrire",
+    "light_mode": "Mode Clair",
+    "dark_mode": "Mode Sombre"
   },
   "login": {
     "login": "Connexion",

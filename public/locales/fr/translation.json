@@ -1,0 +1,71 @@
+{
+  "language": "Langue",
+  "register": {
+    "title": "S'inscrire",
+    "username": "Nom d'utilisateur",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "button": "S'inscrire",
+    "terms": "En cliquant sur S'inscrire, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité."
+  },
+  "navbar": {
+    "home": "Accueil",
+    "todos": "Tâches",
+    "todosHistory": "Historique des Tâches",
+    "profile": "Profil",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "register": "S'inscrire"
+  },
+  "login": {
+    "login": "Connexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "invalid email or password": "Email ou mot de passe invalide",
+    "by clicking continue, you agree to our": "En cliquant sur continuer, vous acceptez nos",
+    "terms of service": "Conditions d'utilisation",
+    "privacy policy": "Politique de confidentialité",
+    "and": "et"
+  },
+  "myprofile": {
+    "my profile": "Mon Profil",
+    "first name": "Prénom",
+    "last name": "Nom",
+    "username": "Nom d'utilisateur",
+    "email": "Email",
+    "country": "Pays",
+    "phone number": "Numéro de téléphone",
+    "location": "Lieu",
+    "birthday": "Date de naissance",
+    "day": "Jour",
+    "month": "Mois",
+    "save changes": "Enregistrer les modifications",
+    "delete account": "Supprimer le compte",
+    "after deleting your account": "Après avoir supprimé votre compte, vous perdrez toutes les informations associées, y compris les tâches, les événements, les projets, les notes, etc. Vous ne pourrez pas les récupérer plus tard, alors réfléchissez bien avant de le faire.",
+    "delete my account": "Supprimer mon compte",
+    "changes saved!": "Modifications enregistrées !",
+    "are you sure you want to delete your account?": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
+    "account deleted": "Compte supprimé"
+  },
+  "calendar": {
+    "valid_json_file": "Veuillez sélectionner un fichier JSON valide.",
+    "week": "Semaine du",
+    "filter": "Filtrer :",
+    "clear_filter": "Effacer le filtre",
+    "import_schedule": "Importez votre propre emploi du temps : "
+  },
+  "todo": {
+    "title": "Mes Tâches",
+    "addTaskButton": "+",
+    "addNewTask": "Ajouter une Nouvelle Tâche",
+    "taskNameLabel": "Nom de la Tâche :",
+    "selectColorLabel": "Sélectionner la Couleur :",
+    "startDateTimeLabel": "Date et Heure de Début :",
+    "endDateTimeLabel": "Date et Heure de Fin :",
+    "markAsUrgent": "Marquer comme urgent",
+    "cancelButton": "Annuler",
+    "addTask": "Ajouter la Tâche",
+    "alertEndDate": "La date et l'heure de fin ne peuvent pas être avant la date et l'heure de début."
+  }
+}

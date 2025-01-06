@@ -23,6 +23,11 @@ function LanguageSwitcher() {
                 <ul className="dropdown-menu">
                     <li onClick={() => changeLanguage('en')}>English</li>
                     <li onClick={() => changeLanguage('sl')}>Slovenščina</li>
+                    <li onClick={() => changeLanguage('de')}>Deutsch</li>
+                    <li onClick={() => changeLanguage('es')}>Español</li>
+                    <li onClick={() => changeLanguage('fr')}>Français</li>
+                    <li onClick={() => changeLanguage('it')}>Italiano</li>
+                    <li onClick={() => changeLanguage('ja')}>日本語</li>
                 </ul>
             )}
         </div>

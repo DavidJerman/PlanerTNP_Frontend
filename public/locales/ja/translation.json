@@ -1,0 +1,71 @@
+{
+  "language": "言語",
+  "register": {
+    "title": "登録",
+    "username": "ユーザー名",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "button": "登録",
+    "terms": "登録ボタンをクリックすることで、利用規約とプライバシーポリシーに同意したことになります。"
+  },
+  "navbar": {
+    "home": "ホーム",
+    "todos": "To-Do",
+    "todosHistory": "To-Do履歴",
+    "profile": "プロフィール",
+    "logout": "ログアウト",
+    "login": "ログイン",
+    "register": "登録"
+  },
+  "login": {
+    "login": "ログイン",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "invalid email or password": "無効なメールアドレスまたはパスワード",
+    "by clicking continue, you agree to our": "続行をクリックすることで、",
+    "terms of service": "利用規約",
+    "privacy policy": "プライバシーポリシー",
+    "and": "および"
+  },
+  "myprofile": {
+    "my profile": "マイプロフィール",
+    "first name": "名前",
+    "last name": "苗字",
+    "username": "ユーザー名",
+    "email": "メールアドレス",
+    "country": "国",
+    "phone number": "電話番号",
+    "location": "所在地",
+    "birthday": "誕生日",
+    "day": "日",
+    "month": "月",
+    "save changes": "変更を保存",
+    "delete account": "アカウント削除",
+    "after deleting your account": "アカウントを削除すると、関連するすべての情報（タスク、イベント、プロジェクト、ノートなど）が失われます。後で復元することはできませんので、この操作を実行する前に再度確認してください。",
+    "delete my account": "アカウント削除",
+    "changes saved!": "変更が保存されました！",
+    "are you sure you want to delete your account?": "本当にアカウントを削除しますか？この操作は元に戻すことができません。",
+    "account deleted": "アカウントが削除されました"
+  },
+  "calendar": {
+    "valid_json_file": "有効なJSONファイルを選択してください。",
+    "week": "週の",
+    "filter": "フィルター：",
+    "clear_filter": "フィルターをクリア",
+    "import_schedule": "自分のスケジュールをインポート："
+  },
+  "todo": {
+    "title": "私のTo-Doリスト",
+    "addTaskButton": "+",
+    "addNewTask": "新しいタスクを追加",
+    "taskNameLabel": "タスク名：",
+    "selectColorLabel": "色を選択：",
+    "startDateTimeLabel": "開始日時：",
+    "endDateTimeLabel": "終了日時：",
+    "markAsUrgent": "緊急としてマーク",
+    "cancelButton": "キャンセル",
+    "addTask": "タスクを追加",
+    "alertEndDate": "終了日時は開始日時より前に設定できません。"
+  }
+}

@@ -6,7 +6,7 @@ import LanguageSwitcher from "./language_switcher";
 import '../App.css';
 import './navbar.css';
 
-function Navbar() {
+function Navbar({ toggleTheme, darkMode }) {
     const location = useLocation();
     const [signedIn, setSignedIn] = useState(false);
     const { t } = useTranslation();
@@ -57,6 +57,11 @@ function Navbar() {
                 )}
                 <li className="navbar-item">
                     <LanguageSwitcher />
+                </li>
+                <li className="navbar-item">
+                    <button onClick={toggleTheme} className="theme-toggle">
+                        {darkMode ? "Light Mode" : "Dark Mode"}
+                    </button>
                 </li>
             </ul>
         </nav>

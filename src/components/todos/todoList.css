@@ -7,12 +7,14 @@
 }
 
 .page-background {
-  background-image: url('/src/src/bg2.jpg');
+  /* background-image: url('/src/src/bg2.jpg'); */
   background-size: cover;
   background-position: center;
   min-height: 100vh;
   background-repeat: no-repeat;
+  background: transparent;
   font-family: 'Poppins', sans-serif;
+  background: transparent; /*so we can add dark mode*/
   padding: 20px;
 }
 

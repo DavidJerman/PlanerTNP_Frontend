@@ -8,9 +8,10 @@
 }
 
 .page-background {
-    background-image: url('/src/src/bg2.jpg');
+    /* background-image: url('/src/src/bg2.jpg'); */
     background-size: cover;
     background-position: center;
+    background: transparent;
     min-height: 100vh; 
     background-repeat: no-repeat;
     display: flex;

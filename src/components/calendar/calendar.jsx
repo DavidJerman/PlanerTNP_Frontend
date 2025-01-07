@@ -18,18 +18,6 @@ function addDays(date, days) {
     return newDate;
 }
 
-const filters = [
-    '#1abc9c',
-    '#2ecc71',
-    '#3498db',
-    '#9b59b6',
-    '#f1c40f',
-    '#e67e22',
-    '#e74c3c',
-    '#34495e',
-    '#95a5a6',
-    '#7f8c8d',
-];
 
 const tmpdata = [
     { "task_name": "overflow: hidden;", "description": "neke neke", "color": '#e74c3c', "start_time": "2024-10-22T14:00:00", "end_time": "2024-10-22T16:00:00" },
@@ -45,10 +33,16 @@ function Calendar() {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [tasks, setTasks] = useState([]);
     const [schedules, setSchedules] = useState([]);
+    const [userColorFilter, setUserColorFilter] = useState(null);
     const fileInputRef = useRef(null);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
+
+      const [userData, setUserData] = useState({
+        CustomFilter1: '',
+        CustomFilter2: '',
+      });
 
     const handleSlotClick = (day, slot) => {
         const slotHour = parseInt(slot.split(":")[0]);
@@ -68,10 +62,12 @@ function Calendar() {
         
         //Create new task
         const newTask = {
-            name: 'New Task',
-            color: filters[0],
+            name:  selectedFilter !== null ? filters[selectedFilter].text : 'New Task',
+            description: 'New Task Description',
+            color: selectedFilter !== null ? filters[selectedFilter].color : filters[0].color,
             startDateTime: slotTime,
             endDateTime: slotEnd,
+            repeat: false,
         };
     
         const user = JSON.parse(Cookie.get("signed_in_user"));
@@ -113,7 +109,13 @@ function Calendar() {
         if (Cookie.get("signed_in_user") !== undefined) {
             const user = JSON.parse(Cookie.get("signed_in_user"));
             setSignedIn(user);
-    
+            axios.get(`${env.api}/auth/user/${user._id}/get-profile`).then((response) => {
+                console.log("USER:", response.data);
+                // Map backend fields with capital letters to lowercase fields in userData state
+                setUserData(() => ({
+                    CustomFilter1: response.data.CustomFilter1 || "",
+                    CustomFilter2: response.data.CustomFilter2 || "",
+                }));})
             // Fetch tasks and schedules in parallel
             Promise.all([
                 axios.get(`${env.api}/task/user/${user._id}/tasks`),
@@ -146,6 +148,19 @@ function Calendar() {
             setSignedIn(false);
         }
     }, []);
+
+    const filters = [
+        { color: '#1abc9c', text: 'Personal' },
+        { color: '#3498db', text: 'Work' },
+        { color: '#e74c3c', text: 'Urgent' },
+        { color: '#9b59b6', text: userData.CustomFilter1 || 'Purple' },
+        { color: '#7f8c8d', text: userData.CustomFilter2 || 'Gray' },
+            // { color: '#f1c40f', text: 'Yellow' },
+        // { color: '#e67e22', text: 'Orange' },
+        // { color: '#34495e', text: 'Dark Blue' },
+        // { color: '#95a5a6', text: 'Gray' },
+            // { color: '#2ecc71', text: 'Light Green' },
+    ];
     
 
     const handlePrevWeek = () => {
@@ -191,29 +206,70 @@ function Calendar() {
     
     
 
+    // const renderTaskInTimeSlot = (day, slot) => {
+    //     const dayTasks = tasks.filter(task => {
+    //         const taskStart = new Date(task.startDateTime);
+    //         const taskEnd = new Date(task.endDateTime);
+    //         const slotHour = parseInt(slot.split(":")[0]);
+    //         const slotMinutes = parseInt(slot.split(":")[1]);
+    
+    //         const slotTime = new Date(day);
+    //         slotTime.setHours(slotHour, slotMinutes, 0, 0);
+    //         // Adjust to include entire range on the given day
+    //         return (taskStart <= slotTime && taskEnd > slotTime);
+    //     });
+    
+    //     return dayTasks.map((task, index) => (
+    //         selectedFilter !== null && task.color !== filters[selectedFilter] ? null : (
+    //             <div key={index} className="task-ribbon" style={{ backgroundColor: task.color }}>
+    //                 <b onClick={() => handleTaskClick(task)}>{/*⠀*/task.name}</b>
+    //                 <button onClick={() => handleTaskRightClick(task)}>X</button>
+    //             </div>
+    //         )
+    //     ));
+    // };
+    
     const renderTaskInTimeSlot = (day, slot) => {
-        const dayTasks = tasks.filter(task => {
+        const slotTime = new Date(day);
+        const [slotHour, slotMinutes] = slot.split(":").map(Number);
+        slotTime.setHours(slotHour, slotMinutes, 0, 0);
+    
+        const taskInSlot = tasks.find(task => {
             const taskStart = new Date(task.startDateTime);
             const taskEnd = new Date(task.endDateTime);
-            const slotHour = parseInt(slot.split(":")[0]);
-            const slotMinutes = parseInt(slot.split(":")[1]);
-    
-            const slotTime = new Date(day);
-            slotTime.setHours(slotHour, slotMinutes, 0, 0);
-            // Adjust to include entire range on the given day
-            return (taskStart <= slotTime && taskEnd > slotTime);
+            return taskStart <= slotTime && taskEnd > slotTime;
         });
     
-        return dayTasks.map((task, index) => (
-            selectedFilter !== null && task.color !== filters[selectedFilter] ? null : (
-                <div key={index} className="task-ribbon" style={{ backgroundColor: task.color }}>
-                    <b onClick={() => handleTaskClick(task)}>{/*⠀*/task.name}</b>
-                    <button onClick={() => handleTaskRightClick(task)}>X</button>
+        if (taskInSlot) {
+            const taskStart = new Date(taskInSlot.startDateTime);
+            const isFirstSlot = taskStart.getHours() === slotHour && taskStart.getMinutes() === slotMinutes;
+            return (
+                <div
+                    className="task-ribbon"
+                    style={{ backgroundColor: taskInSlot.color }}
+                    onClick={() => handleTaskClick(taskInSlot)}
+                >
+                    {isFirstSlot ? (
+                        <>
+                            <b>{taskInSlot.name}</b>
+                            <button
+                            onClick={(e) => {
+                                e.stopPropagation(); // Stop the click event from propagating
+                                handleTaskRightClick(taskInSlot);
+                            }}
+                        >
+                            X
+                        </button>
+                        </>
+                    ) : (
+                        <div></div>
+                    )}
                 </div>
-            )
-        ));
-    };
+            );
+        }
     
+        return null;
+    };
 
     const handleFileImport = (event) => {
         const file = event.target.files[0];
@@ -244,9 +300,9 @@ function Calendar() {
                         key={index}
                         onClick={() => setSelectedFilter(index)}
                         className={`${selectedFilter === index ? 'active-filter' : 'filter'}`}
-                        style={{ backgroundColor: filter }}
+                        style={{ backgroundColor: filter.color }}
                     >
-                        ⠀
+                        {filter.text}
                     </div>
                 ))}
                 <div className="clear-filter" onClick={() => setSelectedFilter(null)}>Clear</div>
@@ -287,7 +343,11 @@ function Calendar() {
                     />
                 </div>) : null
             }
-            <Task isOpen={modalIsOpen} toggleModal={closeModal} task={selectedTask} />
+            <Task 
+                isOpen={modalIsOpen}
+                 toggleModal={closeModal}
+                 task={selectedTask} 
+            />
         </div>
     );
 }

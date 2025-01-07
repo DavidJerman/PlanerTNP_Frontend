@@ -20,6 +20,8 @@ function Profile() {
       Day: '',
       Month: '',
     },
+    CustomFilter1: '',
+    CustomFilter2: '',
   });
 
   // Load mock data when the component mounts
@@ -44,25 +46,13 @@ function Profile() {
             Day: response.data.Birthday?.Day || "",
             Month: response.data.Birthday?.Month || "",
           },
+          CustomFilter1: response.data.CustomFilter1 || "",
+          CustomFilter2: response.data.CustomFilter2 || "",
         }));
       }).catch((error) => {
         console.log('Error:', error);
       });
     }
-    /*    const mockData = {
-          FirstName: 'Name',
-          LastName: 'Surname',
-          Username: 'Username',
-          email: 'name123@example.com',
-          Country: 'Slovenija',
-          PhoneNumber: '+1 123 123 123 ',
-          Location: 'Maribor',
-          birthday: {
-            day: '1',
-            month: 'January',
-          },
-        };
-        setUserData(mockData);*/
   }, []);
 
   const handleChange = (e) => {
@@ -199,6 +189,24 @@ function Profile() {
               placeholder="Month"
             />
           </div>
+          <div className="form-group">
+        <label>Custom Filter 1:</label>
+        <input
+          type="text"
+          name="CustomFilter1"
+          value={userData.CustomFilter1}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label>Custom Filter 2:</label>
+        <input
+          type="text"
+          name="CustomFilter2"
+          value={userData.CustomFilter2}
+          onChange={handleChange}
+        />
+      </div>
           <button type="button" className="save-button" onClick={handleSaveChanges}>
             Save Changes
           </button>

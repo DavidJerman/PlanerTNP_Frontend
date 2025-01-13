@@ -66,6 +66,8 @@ jobs:
       # Upload the code-and-docs.zip file to the release
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./code-and-docs.zip

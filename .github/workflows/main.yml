@@ -27,17 +27,20 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      # Build the project
-      - name: Build project
-        run: npm run build
-
       # Generate documentation
       - name: Generate documentation
         run: npm run generate-docs
 
-      # Upload documentation as an artifact
-      - name: Upload documentation
+      # Zip both the code and the documentation
+      - name: Zip code and documentation
+        run: |
+          zip -r code-and-docs.zip .
+          # Ensure that docs folder is included
+          zip -r code-and-docs.zip ./docs
+
+      # Upload code and documentation as an artifact
+      - name: Upload code and documentation artifact
         uses: actions/upload-artifact@v3
         with:
-          name: documentation
-          path: ./docs
+          name: code-and-docs
+          path: ./code-and-docs.zip

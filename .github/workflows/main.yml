@@ -35,7 +35,6 @@ jobs:
       - name: Zip code and documentation
         run: |
           zip -r code-and-docs.zip .
-          # Ensure that docs folder is included
           zip -r code-and-docs.zip ./docs
 
       # Upload code and documentation as an artifact
@@ -44,3 +43,11 @@ jobs:
         with:
           name: code-and-docs
           path: ./code-and-docs.zip
+
+      # Create a release on GitHub
+      - name: Create a release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./code-and-docs.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

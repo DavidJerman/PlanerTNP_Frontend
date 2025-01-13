@@ -1,14 +1,15 @@
 {
-  "tags": {
-    "allowUnknownTags": true
-  },
   "source": {
     "include": ["src"],
-    "includePattern": ".+\\.js(doc|x)?$",
-    "excludePattern": "(^|\\/|\\\\)_"
+    "exclude": ["node_modules", "build"]
   },
   "opts": {
     "destination": "./docs",
-    "recurse": true
-  }
+    "recurse": true,
+    "readme": "README.md"
+  },
+  "plugins": [
+    "plugins/markdown",
+    "./undocumentedPlugin.js"
+  ]
 }

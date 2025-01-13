@@ -44,6 +44,13 @@ jobs:
           name: code-and-docs
           path: ./code-and-docs.zip
 
+      # Create a new Git tag
+      - name: Create Git tag
+        run: |
+          TAG_NAME="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp for unique tag
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+
       # Create a release on GitHub
       - name: Create a release
         uses: softprops/action-gh-release@v1

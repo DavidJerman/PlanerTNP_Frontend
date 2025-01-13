@@ -34,8 +34,8 @@ jobs:
       # Zip both the code and the documentation
       - name: Zip code and documentation
         run: |
-          zip -r code-and-docs.zip .
-          zip -r code-and-docs.zip ./docs
+          zip -r code-and-docs.zip .  # Zip all files in the repo
+          zip -r code-and-docs.zip ./docs  # Ensure docs are included
 
       # Upload code and documentation as an artifact
       - name: Upload code and documentation artifact
@@ -44,17 +44,30 @@ jobs:
           name: code-and-docs
           path: ./code-and-docs.zip
 
-      # Create a new Git tag
-      - name: Create Git tag
+      # Determine the version (tag) for the release
+      - name: Determine version
+        id: determine_version
         run: |
-          TAG_NAME="v$(date +'%Y%m%d%H%M%S')"  # Use timestamp for unique tag
-          git tag $TAG_NAME
-          git push origin $TAG_NAME
+          VERSION="v$(date +'%Y%m%d%H%M%S')"  # Generate a version based on timestamp (e.g., v20250113123045)
+          echo "version=$VERSION" >> $GITHUB_ENV
 
-      # Create a release on GitHub
-      - name: Create a release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./code-and-docs.zip
+      # Create a release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.version }}
+          release_name: Release ${{ env.version }}
+          draft: false
+          prerelease: false
+
+      # Upload the code-and-docs.zip file to the release
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./code-and-docs.zip
+          asset_name: code-and-docs.zip
+          asset_content_type: application/zip

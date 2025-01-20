@@ -1,0 +1,73 @@
+{
+  "language": "Idioma",
+  "register": {
+    "title": "Registrarse",
+    "username": "Nombre de usuario",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "button": "Registrarse",
+    "terms": "Al hacer clic en Registrarse, aceptas nuestros Términos de servicio y Política de privacidad."
+  },
+  "navbar": {
+    "home": "Inicio",
+    "todos": "Tareas",
+    "todosHistory": "Historial de Tareas",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "light_mode": "Modo Claro",
+    "dark_mode": "Modo Oscuro"
+  },
+  "login": {
+    "login": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "invalid email or password": "Correo electrónico o contraseña incorrectos",
+    "by clicking continue, you agree to our": "Al hacer clic en continuar, aceptas nuestros",
+    "terms of service": "Términos de servicio",
+    "privacy policy": "Política de privacidad",
+    "and": "y"
+  },
+  "myprofile": {
+    "my profile": "Mi Perfil",
+    "first name": "Nombre",
+    "last name": "Apellido",
+    "username": "Nombre de usuario",
+    "email": "Correo electrónico",
+    "country": "País",
+    "phone number": "Número de teléfono",
+    "location": "Ubicación",
+    "birthday": "Fecha de nacimiento",
+    "day": "Día",
+    "month": "Mes",
+    "save changes": "Guardar cambios",
+    "delete account": "Eliminar cuenta",
+    "after deleting your account": "Después de eliminar tu cuenta, perderás toda la información asociada, incluidos tareas, eventos, proyectos, notas, etc. No podrás recuperarla más tarde, así que piénsalo bien antes de hacerlo.",
+    "delete my account": "Eliminar mi cuenta",
+    "changes saved!": "¡Cambios guardados!",
+    "are you sure you want to delete your account?": "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.",
+    "account deleted": "Cuenta eliminada"
+  },
+  "calendar": {
+    "valid_json_file": "Por favor, selecciona un archivo JSON válido.",
+    "week": "Semana del",
+    "filter": "Filtro:",
+    "clear_filter": "Eliminar filtro",
+    "import_schedule": "Importa tu propio horario: "
+  },
+  "todo": {
+    "title": "Mis Tareas",
+    "addTaskButton": "+",
+    "addNewTask": "Añadir Nueva Tarea",
+    "taskNameLabel": "Nombre de la Tarea:",
+    "selectColorLabel": "Seleccionar Color:",
+    "startDateTimeLabel": "Fecha y Hora de Inicio:",
+    "endDateTimeLabel": "Fecha y Hora de Fin:",
+    "markAsUrgent": "Marcar como urgente",
+    "cancelButton": "Cancelar",
+    "addTask": "Añadir Tarea",
+    "alertEndDate": "La fecha y hora de finalización no pueden ser anteriores a la fecha y hora de inicio."
+  }
+}

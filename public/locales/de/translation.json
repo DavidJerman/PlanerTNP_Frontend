@@ -1,0 +1,73 @@
+{
+  "language": "Sprache",
+  "register": {
+    "title": "Registrieren",
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "button": "Registrieren",
+    "terms": "Durch Klicken auf 'Registrieren' stimmen Sie unseren Nutzungsbedingungen und der Datenschutzrichtlinie zu."
+  },
+  "navbar": {
+    "home": "Startseite",
+    "todos": "To-Dos",
+    "todosHistory": "To-Do Verlauf",
+    "profile": "Profil",
+    "logout": "Abmelden",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "light_mode": "Hellen Modus",
+    "dark_mode": "Dunkler Modus"
+  },
+  "login": {
+    "login": "Anmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "invalid email or password": "Ungültige E-Mail oder Passwort",
+    "by clicking continue, you agree to our": "Durch Klicken auf 'Weiter' stimmen Sie unseren",
+    "terms of service": "Nutzungsbedingungen",
+    "privacy policy": "Datenschutzrichtlinie",
+    "and": "und"
+  },
+  "myprofile": {
+    "my profile": "Mein Profil",
+    "first name": "Vorname",
+    "last name": "Nachname",
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "country": "Land",
+    "phone number": "Telefonnummer",
+    "location": "Standort",
+    "birthday": "Geburtstag",
+    "day": "Tag",
+    "month": "Monat",
+    "save changes": "Änderungen speichern",
+    "delete account": "Konto löschen",
+    "after deleting your account": "Nach dem Löschen Ihres Kontos verlieren Sie alle damit verbundenen Informationen, einschließlich Aufgaben, Ereignissen, Projekten, Notizen usw. Sie können diese später nicht wiederherstellen, also denken Sie zweimal nach, bevor Sie dies tun.",
+    "delete my account": "Konto löschen",
+    "changes saved!": "Änderungen gespeichert!",
+    "are you sure you want to delete your account?": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "account deleted": "Konto gelöscht"
+  },
+  "calendar": {
+    "valid_json_file": "Bitte wählen Sie eine gültige JSON-Datei aus.",
+    "week": "Woche von",
+    "filter": "Filter:",
+    "clear_filter": "Filter zurücksetzen",
+    "import_schedule": "Importieren Sie Ihren eigenen Stundenplan: "
+  },
+  "todo": {
+    "title": "Meine To-Dos",
+    "addTaskButton": "+",
+    "addNewTask": "Neue Aufgabe hinzufügen",
+    "taskNameLabel": "Aufgabenname:",
+    "selectColorLabel": "Farbe auswählen:",
+    "startDateTimeLabel": "Startdatum und -uhrzeit:",
+    "endDateTimeLabel": "Enddatum und -uhrzeit:",
+    "markAsUrgent": "Als dringend markieren",
+    "cancelButton": "Abbrechen",
+    "addTask": "Aufgabe hinzufügen",
+    "alertEndDate": "Enddatum und -uhrzeit können nicht vor dem Startdatum und der Startuhrzeit liegen."
+  }
+}

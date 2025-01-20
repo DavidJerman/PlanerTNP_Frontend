@@ -1,0 +1,73 @@
+{
+  "language": "Lingua",
+  "register": {
+    "title": "Registrati",
+    "username": "Nome utente",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Conferma la password",
+    "button": "Registrati",
+    "terms": "Cliccando su Registrati, accetti i nostri Termini di servizio e la nostra Politica sulla privacy."
+  },
+  "navbar": {
+    "home": "Home",
+    "todos": "To-do",
+    "todosHistory": "Storico To-do",
+    "profile": "Profilo",
+    "logout": "Esci",
+    "login": "Accedi",
+    "register": "Registrati",
+    "light_mode": "Modalità Chiara",
+    "dark_mode": "Modalità Scura"
+  },
+  "login": {
+    "login": "Accedi",
+    "email": "Email",
+    "password": "Password",
+    "invalid email or password": "Email o password non validi",
+    "by clicking continue, you agree to our": "Cliccando su continua, accetti i nostri",
+    "terms of service": "Termini di servizio",
+    "privacy policy": "Politica sulla privacy",
+    "and": "e"
+  },
+  "myprofile": {
+    "my profile": "Il mio profilo",
+    "first name": "Nome",
+    "last name": "Cognome",
+    "username": "Nome utente",
+    "email": "Email",
+    "country": "Paese",
+    "phone number": "Numero di telefono",
+    "location": "Posizione",
+    "birthday": "Data di nascita",
+    "day": "Giorno",
+    "month": "Mese",
+    "save changes": "Salva modifiche",
+    "delete account": "Elimina account",
+    "after deleting your account": "Dopo aver eliminato il tuo account, perderai tutte le informazioni correlate, inclusi compiti, eventi, progetti, note, ecc. Non potrai recuperarlo in seguito, quindi pensaci due volte prima di farlo.",
+    "delete my account": "Elimina il mio account",
+    "changes saved!": "Modifiche salvate!",
+    "are you sure you want to delete your account?": "Sei sicuro di voler eliminare il tuo account? Questa azione non può essere annullata.",
+    "account deleted": "Account eliminato"
+  },
+  "calendar": {
+    "valid_json_file": "Seleziona un file JSON valido.",
+    "week": "Settimana del",
+    "filter": "Filtro:",
+    "clear_filter": "Rimuovi filtro",
+    "import_schedule": "Importa il tuo programma: "
+  },
+  "todo": {
+    "title": "I miei To-do",
+    "addTaskButton": "+",
+    "addNewTask": "Aggiungi Nuovo Compito",
+    "taskNameLabel": "Nome del Compito:",
+    "selectColorLabel": "Seleziona Colore:",
+    "startDateTimeLabel": "Data e Ora di Inizio:",
+    "endDateTimeLabel": "Data e Ora di Fine:",
+    "markAsUrgent": "Segna come urgente",
+    "cancelButton": "Annulla",
+    "addTask": "Aggiungi Compito",
+    "alertEndDate": "La data e l'orario di fine non possono essere prima della data e dell'orario di inizio."
+  }
+}

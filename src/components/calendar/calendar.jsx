@@ -3,6 +3,7 @@ import Cookie from "js-cookie";
 import { useEffect, useRef, useState } from "react";
 import '../../App.css';
 import env from "../../env.json";
+import { useTranslation } from 'react-i18next';
 import './calendar.css';
 import Task from "../task/task";
 
@@ -28,6 +29,7 @@ const tmpdata = [
 
 
 function Calendar() {
+    const { t } = useTranslation();
     const [signedIn, setSignedIn] = useState(false);
     const [currentWeek, setCurrentWeek] = useState(getStartOfWeek(new Date()));
     const [selectedFilter, setSelectedFilter] = useState(null);
@@ -59,7 +61,7 @@ function Calendar() {
         });
 
         if (isSlotOccupied) return;
-        
+
         //Create new task
         const newTask = {
             name:  selectedFilter !== null ? filters[selectedFilter].text : 'New Task',
@@ -68,8 +70,9 @@ function Calendar() {
             startDateTime: slotTime,
             endDateTime: slotEnd,
             repeat: false,
+            type: selectedFilter !== null ? filters[selectedFilter].text : filters[0].text,
         };
-    
+
         const user = JSON.parse(Cookie.get("signed_in_user"));
         axios.post(`${env.api}/task/user/${user._id}/tasks`, newTask, {
             headers: {
@@ -121,29 +124,29 @@ function Calendar() {
                 axios.get(`${env.api}/task/user/${user._id}/tasks`),
                 axios.get(`${env.api}/schedule/schedules/all`)
             ])
-            .then(([taskResponse, scheduleResponse]) => {
-                const userTasks = taskResponse.data.tasks;
-                const schedules = scheduleResponse.data.tasks;  // Assuming schedules are in 'tasks'
-    
-                // Map over schedules to match task properties
-                const formattedSchedules = schedules.map(schedule => ({
-                    _id: user._id,
-                    name: schedule.name,
-                    color: schedule.color,
-                    startDateTime: schedule.start_time,  // Rename to match tasks' format
-                    endDateTime: schedule.end_time       // Rename to match tasks' format
-                }));
-    
-                // Combine user tasks and formatted schedules into a single array
-                const combinedTasks = [...userTasks, ...formattedSchedules];
-                setTasks(combinedTasks);
-    
-                // Log the combined tasks array
-                console.log("Fetched and combined tasks:", combinedTasks);
-            })
-            .catch((error) => {
-                console.error("Error fetching tasks or schedules:", error);
-            });
+                .then(([taskResponse, scheduleResponse]) => {
+                    const userTasks = taskResponse.data.tasks;
+                    const schedules = scheduleResponse.data.tasks;  // Assuming schedules are in 'tasks'
+
+                    // Map over schedules to match task properties
+                    const formattedSchedules = schedules.map(schedule => ({
+                        _id: user._id,
+                        name: schedule.name,
+                        color: schedule.color,
+                        startDateTime: schedule.start_time,  // Rename to match tasks' format
+                        endDateTime: schedule.end_time       // Rename to match tasks' format
+                    }));
+
+                    // Combine user tasks and formatted schedules into a single array
+                    const combinedTasks = [...userTasks, ...formattedSchedules];
+                    setTasks(combinedTasks);
+
+                    // Log the combined tasks array
+                    console.log("Fetched and combined tasks:", combinedTasks);
+                })
+                .catch((error) => {
+                    console.error("Error fetching tasks or schedules:", error);
+                });
         } else {
             setSignedIn(false);
         }
@@ -198,36 +201,13 @@ function Calendar() {
     const filteredTasks = tasks.filter(task => {
         const startDate = new Date(task.startDateTime);
         const endDate = new Date(task.endDateTime);
-    
+
         return weekDays.some(day => (
-            (startDate <= day && endDate >= day) // Checks if the task spans across the week
+            (startDate <= day && endDate >= day) 
         ));
     });
     
     
-
-    // const renderTaskInTimeSlot = (day, slot) => {
-    //     const dayTasks = tasks.filter(task => {
-    //         const taskStart = new Date(task.startDateTime);
-    //         const taskEnd = new Date(task.endDateTime);
-    //         const slotHour = parseInt(slot.split(":")[0]);
-    //         const slotMinutes = parseInt(slot.split(":")[1]);
-    
-    //         const slotTime = new Date(day);
-    //         slotTime.setHours(slotHour, slotMinutes, 0, 0);
-    //         // Adjust to include entire range on the given day
-    //         return (taskStart <= slotTime && taskEnd > slotTime);
-    //     });
-    
-    //     return dayTasks.map((task, index) => (
-    //         selectedFilter !== null && task.color !== filters[selectedFilter] ? null : (
-    //             <div key={index} className="task-ribbon" style={{ backgroundColor: task.color }}>
-    //                 <b onClick={() => handleTaskClick(task)}>{/*⠀*/task.name}</b>
-    //                 <button onClick={() => handleTaskRightClick(task)}>X</button>
-    //             </div>
-    //         )
-    //     ));
-    // };
     
     const renderTaskInTimeSlot = (day, slot) => {
         const slotTime = new Date(day);
@@ -254,7 +234,7 @@ function Calendar() {
                             <b>{taskInSlot.name}</b>
                             <button
                             onClick={(e) => {
-                                e.stopPropagation(); // Stop the click event from propagating
+                                e.stopPropagation(); 
                                 handleTaskRightClick(taskInSlot);
                             }}
                         >
@@ -282,7 +262,7 @@ function Calendar() {
             };
             reader.readAsText(file);
         } else {
-            alert("Please select a valid JSON file.");
+            alert(t("calendar.valid_json_file"));
         }
     };
 
@@ -290,11 +270,11 @@ function Calendar() {
         <div className="calendar-container">
             <div className="calendar-header">
                 <button className="change-week" onClick={handlePrevWeek}>←</button>
-                <h2>Week of {currentWeek.toDateString()}</h2>
+                <h2>{t("calendar.week")} {currentWeek.toDateString()}</h2>
                 <button className="change-week" onClick={handleNextWeek}>→</button>
             </div>
             <div className="filters">
-                <div>Filter:</div>
+                <div>{t("calendar.filter")}</div>
                 {filters.map((filter, index) => (
                     <div
                         key={index}
@@ -305,7 +285,7 @@ function Calendar() {
                         {filter.text}
                     </div>
                 ))}
-                <div className="clear-filter" onClick={() => setSelectedFilter(null)}>Clear</div>
+                <div className="clear-filter" onClick={() => setSelectedFilter(null)}>{t("calendar.clear_filter")}</div>
             </div>
             <div className="calendar-grid-wrapper">
                 <div className="time-label-column">
@@ -334,7 +314,7 @@ function Calendar() {
             </div>
             {signedIn !== false ? (
                 <div className="import-data">
-                    <span>Import your own schedule: </span>
+                    <span>{t("calendar.import_schedule")}</span>
                     <input
                         type="file"
                         accept=".json"

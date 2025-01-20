@@ -1,0 +1,73 @@
+{
+  "language": "Jezik",
+  "register": {
+    "title": "Registracija",
+    "username": "Uporabniško ime",
+    "email": "Email naslov",
+    "password": "Geslo",
+    "confirmPassword": "Ponovi geslo",
+    "button": "Registriraj se",
+    "terms": "Ob kliku na 'Registriraj se' soglašate z našimi pogoji uporabe."
+  },
+  "navbar": {
+    "home": "Domov",
+    "todos": "Opravilni seznam",
+    "todosHistory": "Zgodovina opravil",
+    "profile": "Profil",
+    "logout": "Odjava",
+    "login": "Prijava",
+    "register": "Registracija",
+    "light_mode": "Svetli način",
+    "dark_mode": "Temni način"
+  },
+  "login": {
+    "login": "Prijava",
+    "email": "Email naslov",
+    "password": "Geslo",
+    "invalid email or password": "Nepravilno geslo ali email naslov",
+    "by clicking continue, you agree to our": "Ob kliku na gumb 'Prijava' se strinjate s",
+    "terms of service": "Pogoji uporabe",
+    "privacy policy": "Politiko zasebnosti",
+    "and": "in"
+  },
+  "myprofile": {
+    "my profile": "Moj profil",
+    "first name": "Ime",
+    "last name": "Priimek",
+    "username": "Uporabniško ime",
+    "email": "Email naslov",
+    "country": "Država",
+    "phone number": "Telefonska številka",
+    "location": "Lokacija",
+    "birthday": "Rojstni dan",
+    "day": "Dan",
+    "month": "Mesec",
+    "save changes": "Shrani spremembe",
+    "delete account": "Izbriši račun",
+    "after deleting your account": "Po brisanju računa boste izgubili vse povezane informacije, vključno z nalogami, dogodki, projekti, opombami itd. Teh informacij kasneje ne boste mogli obnoviti, zato dobro premislite pred tem dejanjem.",
+    "delete my account": "Izbriši moj račun",
+    "changes saved!": "Spremembe shranjene!",
+    "are you sure you want to delete your account?": "Ste prepričani, da želite izbrisati svoj račun? To dejanje je nepovratno.",
+    "account deleted": "Račun izbrisan"
+  },
+  "calendar": {
+    "valid_json_file": "Prosim izberite veljavno JSON datoteko.",
+    "week": "Teden",
+    "filter": "Filter:",
+    "clear_filter": "Pobriši filter",
+    "import_schedule": "Uvozite svoj koledar: "
+  },
+  "todo": {
+    "title": "Moj To-Do Seznam",
+    "addTaskButton": "+",
+    "addNewTask": "Dodaj novo opravilo",
+    "taskNameLabel": "Ime opravila:",
+    "selectColorLabel": "Izberite barvo:",
+    "startDateTimeLabel": "Začetni datum in čas:",
+    "endDateTimeLabel": "Končni datum in čas:",
+    "markAsUrgent": "Označi kot nujno",
+    "cancelButton": "Prekliči",
+    "addTask": "Dodaj nalogo",
+    "alertEndDate": "Končni datum in čas ne moreta biti pred začetnim datumom in časom."
+  }
+}

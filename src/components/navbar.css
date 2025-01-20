@@ -50,3 +50,25 @@
         margin: 10px 0;
     }
 }
+
+.theme-toggle-button {
+    background-color: transparent;
+    border: none;
+    color: #0d1b35;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: color 0.3s;
+    outline: none;
+}
+
+.theme-toggle-button:hover {
+    color: #f3f7ff;
+}
+
+@media (max-width: 830px) {
+    .theme-toggle {
+        margin: 10px 0;
+    }
+}
